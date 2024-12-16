@@ -2,8 +2,8 @@
   <!-- footer section -->
   <footer class="container-fluid footer_section">
     <p>
-      &copy; 2020 All Rights Reserved. Design by
-      <a href="https://html.design/">Free Html Templates</a>
+      &copy; <?php echo date('Y'); ?> Wordpress Theme Developed By 
+      <a href="https://facebook.com/PCBNLL" target="_blank">Emran</a>
     </p>
   </footer>
   <!-- footer section -->
