@@ -4,7 +4,7 @@
         function neogym_bootstrapping()
         {
             load_theme_textdomain('neogym');
-            add_theme_support('post-thumbnails');
+            add_theme_support('post-thumbnails',['post']);
             add_theme_support('post-formats', ['aside', 'gallery', 'quote', 'image', 'video']);
         }
     }
