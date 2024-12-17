@@ -381,7 +381,7 @@
                 </div>
 
                 <div class="card-body">
-                  <h2 class="card-title h5"><?php the_title(); ?></h2>
+                  <a href="<?php the_permalink() ?>"><h2 class="card-title h5"><?php the_title(); ?></h2></a>
 
                   <p class="card-text text-muted small">
                     <?php echo get_custom_excerpt(10); ?>
