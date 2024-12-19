@@ -4,7 +4,7 @@ if (!function_exists('neogym_bootstrapping')) {
     function neogym_bootstrapping()
     {
         load_theme_textdomain('neogym');
-        add_theme_support('post-thumbnails', ['post']);
+        add_theme_support('post-thumbnails', ['post', 'trainers']);
         add_theme_support('post-formats', ['aside', 'gallery', 'quote', 'image', 'video']);
         register_nav_menus(
             [
@@ -57,7 +57,6 @@ if (!function_exists('neogym_add_custom_class_to_main_menu')) {
 
 add_filter('nav_menu_css_class', 'neogym_add_custom_class_to_main_menu', 10, 3);
 
-
 /* This code snippet defines a function `neogym_add_custom_class_to_main_menu_links` that is used as a
 filter callback to add a custom class to the attributes of main menu links in WordPress. */
 
@@ -73,3 +72,61 @@ if (!function_exists('neogym_add_custom_class_to_main_menu_links')) {
     }
 }
 add_filter('nav_menu_link_attributes', 'neogym_add_custom_class_to_main_menu_links', 10, 3);
+
+
+// Register Custom Post Type
+function neogym_custom_post_type()
+{
+
+    $labels = [
+        'name' => _x('Trainers', 'Post Type General Name', 'neogym'),
+        'singular_name' => _x('Trainer', 'Post Type Singular Name', 'neogym'),
+        'menu_name' => __('Trainers', 'neogym'),
+        'name_admin_bar' => __('Trainers', 'neogym'),
+        'archives' => __('Item Archives', 'neogym'),
+        'attributes' => __('Item Attributes', 'neogym'),
+        'parent_item_colon' => __('Parent Item:', 'neogym'),
+        'all_items' => __('All Trainers', 'neogym'),
+        'add_new_item' => __('Add New Trainer', 'neogym'),
+        'add_new' => __('Add New', 'neogym'),
+        'new_item' => __('New Item', 'neogym'),
+        'edit_item' => __('Edit Item', 'neogym'),
+        'update_item' => __('Update Item', 'neogym'),
+        'view_item' => __('View Item', 'neogym'),
+        'view_items' => __('View Items', 'neogym'),
+        'search_items' => __('Search Item', 'neogym'),
+        'not_found' => __('Not found', 'neogym'),
+        'not_found_in_trash' => __('Not found in Trash', 'neogym'),
+        'featured_image' => __('Featured Image', 'neogym'),
+        'set_featured_image' => __('Set featured image', 'neogym'),
+        'remove_featured_image' => __('Remove featured image', 'neogym'),
+        'use_featured_image' => __('Use as featured image', 'neogym'),
+        'insert_into_item' => __('Insert into item', 'neogym'),
+        'uploaded_to_this_item' => __('Uploaded to this item', 'neogym'),
+        'items_list' => __('Items list', 'neogym'),
+        'items_list_navigation' => __('Items list navigation', 'neogym'),
+        'filter_items_list' => __('Filter items list', 'neogym'),
+    ];
+    $args = [
+        'label' => __('Trainer', 'neogym'),
+        'description' => __('Post Type Description', 'neogym'),
+        'menu_icon' => 'dashicons-admin-customizer',
+        'labels' => $labels,
+        'supports' => ['title', 'editor', 'thumbnail'],
+        'hierarchical' => false,
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'show_in_admin_bar' => true,
+        'show_in_nav_menus' => true,
+        'can_export' => true,
+        'has_archive' => true,
+        'exclude_from_search' => false,
+        'publicly_queryable' => true,
+        'capability_type' => 'page',
+    ];
+    register_post_type('Trainers', $args);
+
+}
+add_action('init', 'neogym_custom_post_type', 0);
