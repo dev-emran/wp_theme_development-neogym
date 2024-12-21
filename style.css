@@ -677,3 +677,17 @@ Blog section
     /* Fixed height for images */
     object-fit: cover;
 }
+
+
+
+
+
+
+
+
+
+
+/* custom */
+.why_us_content p {
+    text-align: justify;
+}

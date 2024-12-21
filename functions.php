@@ -4,7 +4,7 @@ if (!function_exists('neogym_bootstrapping')) {
     function neogym_bootstrapping()
     {
         load_theme_textdomain('neogym');
-        add_theme_support('post-thumbnails', ['post', 'trainers']);
+        add_theme_support('post-thumbnails', ['post', 'trainers', 'why_us']);
         add_theme_support('post-formats', ['aside', 'gallery', 'quote', 'image', 'video']);
         register_nav_menus(
             [
@@ -45,12 +45,9 @@ if (!function_exists('neogym_add_custom_class_to_main_menu')) {
                 if (!is_front_page() && $item->url === home_url('/')) {
                     return $classes;
                 }
-
                 $classes[] = 'active';
             }
-
         }
-
         return $classes;
     }
 }
@@ -72,7 +69,6 @@ if (!function_exists('neogym_add_custom_class_to_main_menu_links')) {
     }
 }
 add_filter('nav_menu_link_attributes', 'neogym_add_custom_class_to_main_menu_links', 10, 3);
-
 
 // Register Custom Post Type
 function neogym_custom_post_type()
@@ -120,13 +116,32 @@ function neogym_custom_post_type()
         'menu_position' => 5,
         'show_in_admin_bar' => true,
         'show_in_nav_menus' => true,
-        'can_export' => true,
         'has_archive' => true,
-        'exclude_from_search' => false,
-        'publicly_queryable' => true,
-        'capability_type' => 'page',
     ];
-    register_post_type('Trainers', $args);
+    register_post_type('trainers', $args);
 
 }
 add_action('init', 'neogym_custom_post_type', 0);
+
+
+if(!function_exists('neogym_why_us_cpt')){
+    function neogym_why_us_cpt()
+    {
+        register_post_type('why_us', [
+            'labels'    => [
+                    'name'              => __('Why Us', 'neogym'),
+                    'singular_name'     => _x('why_us', 'neogym'),
+                    'add_new_item'      => __('Add New', 'neogym'),
+                    'add_new'           => __('Add New', 'neogym'),
+                    'all_items'         => __('All Why_Us', 'neogym'),
+            ],
+            'label'         => __('Why_us', 'neogym'),
+            'public'        => true,
+            'has_archive'   => true,
+            'supports'      => ['title', 'editor', 'thumbnail'],
+            'menu_icon'     => 'dashicons-admin-network',
+        ]);
+    }
+}
+
+add_action('init', 'neogym_why_us_cpt',0);
