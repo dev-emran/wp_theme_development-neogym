@@ -607,11 +607,12 @@ a:focus {
 /*
 Blog section
 */
-.blog_section{
+.blog_section {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
+
 .section-title {
     position: relative;
     margin-bottom: 50px;
@@ -688,6 +689,35 @@ Blog section
 
 
 /* custom */
-.why_us_content p {
-    text-align: justify;
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.student-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(45deg, #4e73df 0%, #224abe 100%);
+}
+
+.stats-card {
+    border-left: 4px solid;
+}
+
+.search-bar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }

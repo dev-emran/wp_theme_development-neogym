@@ -4,7 +4,7 @@ if (!function_exists('neogym_bootstrapping')) {
     function neogym_bootstrapping()
     {
         load_theme_textdomain('neogym');
-        add_theme_support('post-thumbnails', ['post', 'trainers', 'why_us']);
+        add_theme_support('post-thumbnails', ['post', 'trainers', 'why_us', 'students']);
         add_theme_support('post-formats', ['aside', 'gallery', 'quote', 'image', 'video']);
         register_nav_menus(
             [
@@ -123,25 +123,108 @@ function neogym_custom_post_type()
 }
 add_action('init', 'neogym_custom_post_type', 0);
 
-
-if(!function_exists('neogym_why_us_cpt')){
+if (!function_exists('neogym_why_us_cpt')) {
     function neogym_why_us_cpt()
     {
         register_post_type('why_us', [
-            'labels'    => [
-                    'name'              => __('Why Us', 'neogym'),
-                    'singular_name'     => _x('why_us', 'neogym'),
-                    'add_new_item'      => __('Add New', 'neogym'),
-                    'add_new'           => __('Add New', 'neogym'),
-                    'all_items'         => __('All Why_Us', 'neogym'),
+            'labels' => [
+                'name' => __('Why Us', 'neogym'),
+                'singular_name' => _x('why_us', 'neogym'),
+                'add_new_item' => __('Add New', 'neogym'),
+                'add_new' => __('Add New', 'neogym'),
+                'all_items' => __('All Why_Us', 'neogym'),
             ],
-            'label'         => __('Why_us', 'neogym'),
-            'public'        => true,
-            'has_archive'   => true,
-            'supports'      => ['title', 'editor', 'thumbnail'],
-            'menu_icon'     => 'dashicons-admin-network',
+            'label' => __('Why_us', 'neogym'),
+            'public' => true,
+            'has_archive' => true,
+            'supports' => ['title', 'editor', 'thumbnail'],
+            'menu_icon' => 'dashicons-admin-network',
         ]);
     }
 }
 
-add_action('init', 'neogym_why_us_cpt',0);
+add_action('init', 'neogym_why_us_cpt', 0);
+
+/* This code snippet is defining a custom post type called 'Students' in WordPress. Here's a breakdown
+of what the code does: */
+
+if (!function_exists('neogym_students_custom_post_type')) {
+    function neogym_students_custom_post_type()
+    {
+        $labeles = [
+            'name' => __('Students', 'neogym'),
+            'singular_name' => __('Student', 'neogym'),
+            'menu_name' => __('Students', 'neogym'),
+            'name_admin_bar' => __('Students', 'neogym'),
+            'add_new' => __('Add new', 'neogym'),
+            'add_new_item' => __('Add New Student', 'neogym'),
+            'not_found' => __('No students found', 'neogym'),
+            'featured_image' => __('Student image', 'neogym'),
+            'set_featured_image' => __('Set student image', 'neogym'),
+            'remove_featured_image' => __('Remove Student Image', 'neogym'),
+            'edit_item' => __('Edit Student', 'neogym'),
+            'not_found_in_trash' => __('No student found in trash'),
+            'search_items' => __('Search student', 'neogym'),
+            'items_list' => __('Student list', 'neogym'),
+            'filter_items_list' => __('Filter items list', 'neogym'),
+            'view_items' => __('View Student', 'neogym'),
+            'item_published' => __('Student published', 'neogym'),
+            'item_updated' => __('Student updated', 'neogym'),
+            'item_reverted_to_draft' => __('Student reverted to draft'),
+
+        ];
+        $args = [
+            'labels' => $labeles,
+            'public' => true,
+            'menu_icon' => 'dashicons-groups',
+            'supports' => ['title', 'editor', 'thumbnail'],
+            'show_in_menu' => true,
+            'has_archive' => true,
+        ];
+        register_post_type('students', $args);
+    }
+}
+add_action('init', 'neogym_students_custom_post_type');
+
+//custom post type title placeholder change
+if (!function_exists('neogym_custom_student_title_placeholder')) {
+    function neogym_custom_student_title_placeholder($title)
+    {
+        $screen = get_current_screen();
+        if ($screen->post_type === 'students') {
+            $title = 'Enter Student Name';
+        }
+        return $title;
+    }
+}
+add_filter('enter_title_here', 'neogym_custom_student_title_placeholder');
+
+if (!function_exists('neogym_custom_taxonomy_department')) {
+    function neogym_custom_taxonomy_department()
+    {
+        $labels = [
+            'name' => _x('Depertment', 'taxonomy general name'),
+            'singular_name' => _x('Department', 'taxonomy singular name'),
+            'search_items' => __('Search Depertment'),
+            'all_items' => __('All Depertment'),
+            'parent_item' => __('Parent Department'),
+            'parent_item_colon' => __('Parent Department:'),
+            'edit_item' => __('Edit Department'),
+            'update_item' => __('Update Department'),
+            'add_new_item' => __('Add New Department'),
+            'new_item_name' => __('New Department Name'),
+            'menu_name' => __('Depertment'),
+        ];
+        $args = [
+            'hierarchical' => true,
+            'labels' => $labels,
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'query_var' => true,
+            'rewrite' => ['slug' => 'depertment'],
+        ];
+
+        register_taxonomy('department', ['students'], $args);
+    }
+}
+add_action('init', 'neogym_custom_taxonomy_department');
