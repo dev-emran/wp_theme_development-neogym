@@ -154,6 +154,29 @@
 </div>
 
 
+<!-- Shortcode section -->
+
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/us-bg.jpg);" class="shortcode_section contact_section layout_padding">
+  <div class="container">
+    <div class="heading_container">
+      <h2 class="text-center">
+        Shortcode Section
+      </h2>
+    </div>
+
+    <div class="us_container ">
+      <div class="row">
+        <div class="col-md-6 form_container">
+          <?php echo do_shortcode('[neogym_my_first_shortcode]') ?>
+        </div>
+        <div class="col-md-6">
+          <?php echo do_shortcode('[neogym_contact_form]') ?>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- end shortcode section -->
 <!-- Us section -->
 
 <section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/us-bg.jpg);" class="us_section layout_padding">
@@ -446,25 +469,7 @@
               Contact Us
             </h2>
           </div>
-          <form action="">
-            <div>
-              <input type="text" placeholder="Name" />
-            </div>
-            <div>
-              <input type="email" placeholder="Email" />
-            </div>
-            <div>
-              <input type="text" placeholder="Phone Number" />
-            </div>
-            <div>
-              <input type="text" class="message-box" placeholder="Message" />
-            </div>
-            <div class="d-flex ">
-              <button>
-                Send
-              </button>
-            </div>
-          </form>
+          <?php echo do_shortcode('[neogym_contact_form]'); ?>
         </div>
       </div>
     </div>

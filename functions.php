@@ -62,7 +62,6 @@ if (!function_exists('neogym_add_custom_class_to_main_menu_links')) {
     {
         if ($args->theme_location === 'main_menu') {
             $attrs['class'] = 'nav-link';
-
         }
 
         return $attrs;
@@ -119,7 +118,6 @@ function neogym_custom_post_type()
         'has_archive' => true,
     ];
     register_post_type('trainers', $args);
-
 }
 add_action('init', 'neogym_custom_post_type', 0);
 
@@ -187,6 +185,10 @@ if (!function_exists('neogym_students_custom_post_type')) {
 add_action('init', 'neogym_students_custom_post_type');
 
 //custom post type title placeholder change
+/* This code snippet is defining a function `neogym_custom_student_title_placeholder` that is used as a
+filter callback to customize the placeholder text for the title field in the WordPress admin area
+when adding a new post of the custom post type 'students'. */
+
 if (!function_exists('neogym_custom_student_title_placeholder')) {
     function neogym_custom_student_title_placeholder($title)
     {
@@ -198,6 +200,10 @@ if (!function_exists('neogym_custom_student_title_placeholder')) {
     }
 }
 add_filter('enter_title_here', 'neogym_custom_student_title_placeholder');
+
+//custom taxonomy
+/* This code snippet is defining a custom taxonomy called 'Department' for the custom post type
+'students' in WordPress. Here's a breakdown of what the code does: */
 
 if (!function_exists('neogym_custom_taxonomy_department')) {
     function neogym_custom_taxonomy_department()
@@ -228,3 +234,57 @@ if (!function_exists('neogym_custom_taxonomy_department')) {
     }
 }
 add_action('init', 'neogym_custom_taxonomy_department');
+
+//shortcode
+if (!function_exists('neogym_custom_shortcode')) {
+    function neogym_custom_shortcode()
+    {
+        add_shortcode('neogym_my_first_shortcode', 'my_shortcode_function');
+        if (!function_exists('my_shortcode_function')) {
+            function my_shortcode_function()
+            {
+                $content = "This is my first shortcode";
+                return $content;
+            }
+        }
+    }
+}
+add_action('init', 'neogym_custom_shortcode');
+
+if (!function_exists('neogym_contact_form_shortcode_function')) {
+    function neogym_contact_form_shortcode_function()
+    {
+        ob_start();
+        ?>
+
+        <form action="">
+            <div>
+                <input type="text" placeholder="Name" />
+            </div>
+            <div>
+                <input type="email" placeholder="Email" />
+            </div>
+            <div>
+                <input type="text" placeholder="Phone Number" />
+            </div>
+            <div>
+                <input type="text" class="message-box" placeholder="Message" />
+            </div>
+            <div class="d-flex ">
+                <button>
+                    Send
+                </button>
+            </div>
+        </form>
+<?php
+
+        return ob_get_clean();
+    }
+}
+add_shortcode('neogym_contact_form', 'neogym_contact_form_shortcode_function');
+
+add_action('init', function () {
+    if (function_exists('neogym_contact_form_shortcode_function')) {
+        add_shortcode('neogym_contact_form', 'neogym_contact_form_shortcode_function');
+    }
+});
