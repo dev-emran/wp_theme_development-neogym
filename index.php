@@ -20,7 +20,9 @@
                   Neogym
                 </h1>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
                 </p>
                 <div class="">
                   <a href="">
@@ -47,7 +49,9 @@
                   Neogym
                 </h1>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
                 </p>
                 <div class="">
                   <a href="">
@@ -74,7 +78,9 @@
                   Neogym
                 </h1>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
                 </p>
                 <div class="">
                   <a href="">
@@ -101,7 +107,9 @@
                   Neogym
                 </h1>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
                 </p>
                 <div class="">
                   <a href="">
@@ -128,7 +136,9 @@
                   Neogym
                 </h1>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse .
                 </p>
                 <div class="">
                   <a href="">
@@ -156,7 +166,8 @@
 
 <!-- Shortcode section -->
 
-<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/us-bg.jpg);" class="shortcode_section contact_section layout_padding">
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/us-bg.jpg);"
+  class="shortcode_section contact_section layout_padding">
   <div class="container">
     <div class="heading_container">
       <h2 class="text-center">
@@ -167,19 +178,40 @@
     <div class="us_container ">
       <div class="row">
         <div class="col-md-6 form_container">
-          <?php echo do_shortcode('[neogym_my_first_shortcode]') ?>
+          <?php
+          if(shortcode_exists('neogym_my_first_shortcode')):
+            echo do_shortcode('[neogym_my_first_shortcode]');
+          endif;
+          ?>
+          <br>
+          <?php
+          if(shortcode_exists('button')):
+            echo do_shortcode('[button title="Google" url="https://google.com" type="success"/]');
+          endif;
+          ?>
+          <br>
+          <?php
+          if(shortcode_exists('button2')):
+            echo do_shortcode('[button2 url="https://wordpress.org" type="warning"]WordPress[/button2]');
+          endif;
+          ?>
         </div>
         <div class="col-md-6">
-          <?php echo do_shortcode('[neogym_contact_form]') ?>
+          <?php 
+          if(shortcode_exists('neogym_contact_form')):
+            echo do_shortcode('[neogym_contact_form]');
+          endif;
+          ?>
         </div>
+      </div>
     </div>
-  </div>
 </section>
 
 <!-- end shortcode section -->
 <!-- Us section -->
 
-<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/us-bg.jpg);" class="us_section layout_padding">
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/us-bg.jpg);"
+  class="us_section layout_padding">
   <div class="container">
     <div class="heading_container">
       <h2>
@@ -199,7 +231,8 @@
 
         $why_us = new WP_Query($why_us_query_args);
         if ($why_us->have_posts()):
-          while ($why_us->have_posts()): $why_us->the_post();
+          while ($why_us->have_posts()):
+            $why_us->the_post();
         ?>
             <div class="col-lg-3 col-md-6">
               <div class="box">
@@ -235,7 +268,8 @@
 
 <!-- students section -->
 
-<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);" class="heathy_section layout_padding">
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);"
+  class="heathy_section layout_padding">
   <div class="container">
 
     <div class="row">
@@ -245,7 +279,12 @@
             HEALTHY MIND, HEALTHY BODY
           </h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillumLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillumLorem ipsum dolor
+            sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+            enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
           </p>
           <div class="btn-box">
             <a href="">
@@ -259,7 +298,8 @@
   </div>
 </section>
 
-<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);" class="students_section layout_padding">
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);"
+  class="students_section layout_padding">
   <div class="container">
     <div class="heading_container mb-5">
       <h2>
@@ -270,12 +310,13 @@
     <div class="row">
       <?php
       $student_query = [
-        'post_type'   => 'students'
+        'post_type' => 'students',
       ];
 
       $students = new WP_Query($student_query);
       if ($students->have_posts()):
-        while ($students->have_posts()): $students->the_post();
+        while ($students->have_posts()):
+          $students->the_post();
       ?>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card">
@@ -290,12 +331,12 @@
                 <h5 class="card-title text-dark"><?php the_title(); ?></h5>
                 <p class="card-text text-muted">
                   <?php
-                      $departments = get_the_terms(get_the_ID(), 'department');
-                      if($departments && !is_wp_error($departments)){
-                        foreach($departments as $dept){
-                          echo esc_html($dept->name);
-                        }
-                      }
+                  $departments = get_the_terms(get_the_ID(), 'department');
+                  if ($departments && !is_wp_error($departments)) {
+                    foreach ($departments as $dept) {
+                      echo esc_html($dept->name);
+                    }
+                  }
                   ?>
                 </p>
                 <div class="mb-3">
@@ -322,7 +363,8 @@
 
 <!-- trainer section -->
 
-<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/trainer-bg.jpg);" class="trainer_section layout_padding">
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/trainer-bg.jpg);"
+  class="trainer_section layout_padding">
   <div class="container">
     <div class="heading_container">
       <h2>
@@ -340,7 +382,8 @@
 
       $trainer = new $wp_query($trainer_args);
       if ($trainer->have_posts()):
-        while ($trainer->have_posts()): $trainer->the_post();
+        while ($trainer->have_posts()):
+          $trainer->the_post();
       ?>
           <div class="col-lg-4 col-md-6 mx-auto">
             <div class="box">
@@ -378,7 +421,8 @@
 
 
 <!--Blog section Start -->
-<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);" class="blog_section layout_padding">
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);"
+  class="blog_section layout_padding">
   <div class="container">
     <div class="heading_container mb-5">
       <h2 class="text-white">Latest Blog Posts</h2>
@@ -387,7 +431,8 @@
       <?php
       $index = 1;
       if (have_posts()):
-        while (have_posts()): the_post();
+        while (have_posts()):
+          the_post();
       ?>
           <!-- Card <?php echo $index ?> -->
           <div class="col-md-3">
@@ -484,7 +529,9 @@
     <div class="info_items">
       <a href="">
         <div class="item ">
-          <div style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/location-white.png);" class="img-box box-1">
+          <div
+            style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/location-white.png);"
+            class="img-box box-1">
             <img src="" alt="">
           </div>
           <div class="detail-box">
@@ -496,7 +543,9 @@
       </a>
       <a href="">
         <div class="item ">
-          <div style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/telephone-white.png);" class="img-box box-2">
+          <div
+            style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/telephone-white.png);"
+            class="img-box box-2">
             <img src="" alt="">
           </div>
           <div class="detail-box">
@@ -508,7 +557,9 @@
       </a>
       <a href="">
         <div class="item ">
-          <div style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/envelope-white.png);" class="img-box box-3">
+          <div
+            style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/envelope-white.png);"
+            class="img-box box-3">
             <img src="" alt="">
           </div>
           <div class="detail-box">

@@ -281,10 +281,42 @@ if (!function_exists('neogym_contact_form_shortcode_function')) {
         return ob_get_clean();
     }
 }
-add_shortcode('neogym_contact_form', 'neogym_contact_form_shortcode_function');
 
 add_action('init', function () {
     if (function_exists('neogym_contact_form_shortcode_function')) {
         add_shortcode('neogym_contact_form', 'neogym_contact_form_shortcode_function');
+    }
+});
+if (!function_exists('neogym_button')) {
+    function neogym_button($attributes)
+    {
+        return sprintf('<a href="%s" target="_blank" class="btn btn-%s full-width">%s</a>',
+            $attributes['url'],
+            $attributes['type'],
+            $attributes['title']
+        );
+    };
+}
+
+add_action('init', function () {
+    if (function_exists('neogym_button')) {
+        add_shortcode('button', 'neogym_button');
+    }
+});
+
+if (!function_exists('neogym_button2')) {
+    function neogym_button2($attributes, $content)
+    {
+        return sprintf('<a href="%s" target="_blank" class="btn btn-%s full-width">%s</a>',
+            $attributes['url'],
+            $attributes['type'],
+            $content
+        );
+    };
+}
+
+add_action('init', function () {
+    if (function_exists('neogym_button2')) {
+        add_shortcode('button2', 'neogym_button2');
     }
 });
