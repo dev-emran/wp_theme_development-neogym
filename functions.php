@@ -235,88 +235,86 @@ if (!function_exists('neogym_custom_taxonomy_department')) {
 }
 add_action('init', 'neogym_custom_taxonomy_department');
 
+
 //shortcode
-if (!function_exists('neogym_custom_shortcode')) {
-    function neogym_custom_shortcode()
+if (!function_exists('neogym_custom_all_shortcodes')) {
+    function neogym_custom_all_shortcodes()
     {
-        add_shortcode('neogym_my_first_shortcode', 'my_shortcode_function');
-        if (!function_exists('my_shortcode_function')) {
+        //shortcode for my first shortcode 1
+        
+
+        if(!shortcode_exists('neogym_my_first_shortcode')){
             function my_shortcode_function()
             {
                 $content = "This is my first shortcode";
                 return $content;
             }
+
+            add_shortcode('neogym_my_first_shortcode', 'my_shortcode_function');
+        }
+
+        
+        //shortcode for my contact form
+        if(!shortcode_exists('neogym_contact_form')){
+            function neogym_contact_form_shortcode_function()
+            {
+                ob_start();
+                ?>
+                <form action="">
+                    <div>
+                        <input type="text" placeholder="Name" />
+                    </div>
+                    <div>
+                        <input type="email" placeholder="Email" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Phone Number" />
+                    </div>
+                    <div>
+                        <input type="text" class="message-box" placeholder="Message" />
+                    </div>
+                    <div class="d-flex " >
+                        <button>
+                            Send
+                        </button>
+                    </div>
+                </form>
+                <?php
+                return ob_get_clean();
+            }
+
+            add_shortcode('neogym_contact_form', 'neogym_contact_form_shortcode_function');
+        }
+
+        //shortcode for my button
+        
+        if(!shortcode_exists('neogym_button')){
+            function neogym_button($attributes)
+            {
+                return sprintf('<a href="%s" target="_blank" class="btn btn-%s full-width">%s</a>',
+                    $attributes['url'],
+                    $attributes['type'],
+                    $attributes['title']
+                );
+            };
+
+            add_shortcode('button', 'neogym_button');
+        }
+
+        //shortcode for my button2
+        
+        if(!shortcode_exists('neogym_button2')){
+            function neogym_button2($attributes, $content)
+            {
+                return sprintf('<a href="%s" target="_blank" class="btn btn-%s full-width">%s</a>',
+                    $attributes['url'],
+                    $attributes['type'],
+                    $content
+                );
+            };
+
+            add_shortcode('button2', 'neogym_button2');
         }
     }
 }
-add_action('init', 'neogym_custom_shortcode');
-
-if (!function_exists('neogym_contact_form_shortcode_function')) {
-    function neogym_contact_form_shortcode_function()
-    {
-        ob_start();
-        ?>
-
-        <form action="">
-            <div>
-                <input type="text" placeholder="Name" />
-            </div>
-            <div>
-                <input type="email" placeholder="Email" />
-            </div>
-            <div>
-                <input type="text" placeholder="Phone Number" />
-            </div>
-            <div>
-                <input type="text" class="message-box" placeholder="Message" />
-            </div>
-            <div class="d-flex ">
-                <button>
-                    Send
-                </button>
-            </div>
-        </form>
-<?php
-
-        return ob_get_clean();
-    }
-}
-
-add_action('init', function () {
-    if (function_exists('neogym_contact_form_shortcode_function')) {
-        add_shortcode('neogym_contact_form', 'neogym_contact_form_shortcode_function');
-    }
-});
-if (!function_exists('neogym_button')) {
-    function neogym_button($attributes)
-    {
-        return sprintf('<a href="%s" target="_blank" class="btn btn-%s full-width">%s</a>',
-            $attributes['url'],
-            $attributes['type'],
-            $attributes['title']
-        );
-    };
-}
-
-add_action('init', function () {
-    if (function_exists('neogym_button')) {
-        add_shortcode('button', 'neogym_button');
-    }
-});
-
-if (!function_exists('neogym_button2')) {
-    function neogym_button2($attributes, $content)
-    {
-        return sprintf('<a href="%s" target="_blank" class="btn btn-%s full-width">%s</a>',
-            $attributes['url'],
-            $attributes['type'],
-            $content
-        );
-    };
-}
-
-add_action('init', function () {
-    if (function_exists('neogym_button2')) {
-        add_shortcode('button2', 'neogym_button2');
-    }
-});
+add_action('init', 'neogym_custom_all_shortcodes');
