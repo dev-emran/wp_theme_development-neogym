@@ -186,7 +186,7 @@
           <br>
           <?php
           if(shortcode_exists('button')):
-            echo do_shortcode('[button title="Google" url="https://google.com" type="success"/]');
+            echo do_shortcode('[button text="Google" url="https://google.com" type="success"/]');
           endif;
           ?>
           <br>

@@ -235,15 +235,13 @@ if (!function_exists('neogym_custom_taxonomy_department')) {
 }
 add_action('init', 'neogym_custom_taxonomy_department');
 
-
 //shortcode
 if (!function_exists('neogym_custom_all_shortcodes')) {
     function neogym_custom_all_shortcodes()
     {
         //shortcode for my first shortcode 1
-        
 
-        if(!shortcode_exists('neogym_my_first_shortcode')){
+        if (!shortcode_exists('neogym_my_first_shortcode')) {
             function my_shortcode_function()
             {
                 $content = "This is my first shortcode";
@@ -253,9 +251,8 @@ if (!function_exists('neogym_custom_all_shortcodes')) {
             add_shortcode('neogym_my_first_shortcode', 'my_shortcode_function');
         }
 
-        
         //shortcode for my contact form
-        if(!shortcode_exists('neogym_contact_form')){
+        if (!shortcode_exists('neogym_contact_form')) {
             function neogym_contact_form_shortcode_function()
             {
                 ob_start();
@@ -280,21 +277,30 @@ if (!function_exists('neogym_custom_all_shortcodes')) {
                     </div>
                 </form>
                 <?php
-                return ob_get_clean();
+return ob_get_clean();
             }
 
             add_shortcode('neogym_contact_form', 'neogym_contact_form_shortcode_function');
         }
 
         //shortcode for my button
-        
-        if(!shortcode_exists('neogym_button')){
+
+        if (!shortcode_exists('neogym_button')) {
             function neogym_button($attributes)
             {
+                $defult_attributes = [
+                    'url' => '#',
+                    'type' => 'primary',
+                    'text' => 'Button',
+                ];
+                $url = strtolower(esc_url($attributes['url']));
+                $type = strtolower(sanitize_html_class($attributes['type']));
+                $text = __(sanitize_text_field($attributes['text']), 'neogym');
+                $attributes = shortcode_atts($defult_attributes, $attributes);
                 return sprintf('<a href="%s" target="_blank" class="btn btn-%s full-width">%s</a>',
-                    $attributes['url'],
-                    $attributes['type'],
-                    $attributes['title']
+                    $url,
+                    $type,
+                    $text
                 );
             };
 
@@ -302,13 +308,24 @@ if (!function_exists('neogym_custom_all_shortcodes')) {
         }
 
         //shortcode for my button2
-        
-        if(!shortcode_exists('neogym_button2')){
-            function neogym_button2($attributes, $content)
+
+        if (!shortcode_exists('neogym_button2')) {
+            function neogym_button2($attributes, $content = '')
             {
+                $defult_attributes = [
+                    'url' => '#',
+                    'type' => 'primary',
+                ];
+                $attributes = shortcode_atts($defult_attributes, $attributes);
+                $url = strtolower(esc_url($attributes['url']));
+                $type = strtolower(sanitize_html_class($attributes['type']));
+                if (empty($content)) {
+                    $content = 'Button';
+                }
+                $content = do_shortcode($content);
                 return sprintf('<a href="%s" target="_blank" class="btn btn-%s full-width">%s</a>',
-                    $attributes['url'],
-                    $attributes['type'],
+                    $url,
+                    $type,
                     $content
                 );
             };
