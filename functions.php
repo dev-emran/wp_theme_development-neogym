@@ -332,6 +332,36 @@ return ob_get_clean();
 
             add_shortcode('button2', 'neogym_button2');
         }
+
+        //shortcode for google map
+        if (!shortcode_exists('google_map')) {
+            function neogym_google_map_shortcode($attributes)
+            {
+                $defult_attributes = [
+                    'place' => 'Dhaka',
+                    'width' => '100%',
+                    'height' => '700px',
+                    'zoom' => 12,
+                ];
+                $attributes = shortcode_atts($defult_attributes, $attributes);
+
+                $place = sanitize_text_field($attributes['place']);
+                $width = sanitize_text_field($attributes['width']);
+                $height = sanitize_text_field($attributes['height']);
+                $zoom = sanitize_text_field($attributes['zoom']);
+                $map = <<<EOD
+                    <div>
+                        <iframe width="{$width}" height="{$height}"
+                            src="https://maps.google.com/maps?q={$place}&t=&z={$zoom}&ie=UTF8&iwloc=&output=embed"
+                            frameborder="0" scrolling="0" marginheight="0" marginwidth="0"
+                            title="Google Map showing {$place}">
+                        </iframe>
+                    </div>
+                EOD;
+                return $map;
+            }
+            add_shortcode('google_map', 'neogym_google_map_shortcode');
+        }
     }
 }
 add_action('init', 'neogym_custom_all_shortcodes');
