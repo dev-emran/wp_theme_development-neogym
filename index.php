@@ -195,6 +195,11 @@
             echo do_shortcode('[button2 url="https://wordpress.org" type="warning"]WordPress[/button2]');
           endif;
           ?>
+          <?php 
+            if(shortcode_exists( 'content' )){
+              echo do_shortcode( '[content CLASS="customclass" ]My content shortcode[/content]' );
+            }
+          ?>
         </div>
         <div class="col-md-6">
           <?php 
@@ -202,6 +207,7 @@
             echo do_shortcode('[neogym_contact_form]');
           endif;
           ?>
+
         </div>
       </div>
     </div>
