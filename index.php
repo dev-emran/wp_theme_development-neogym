@@ -191,17 +191,17 @@ endif;
 ?>
           <br>
           <?php
-if (shortcode_exists('button2')):
-    echo do_shortcode('[button2 url="https://wordpress.org" type="warning"]WordPress[/button2]');
-endif;
-?>
+          if(shortcode_exists('button2')):
+            echo do_shortcode('[button2 url="https://wordpress.org" type="warning"]WordPress[/button2]');
+          endif;
+          ?>
         </div>
         <div class="col-md-6">
-          <?php
-if (shortcode_exists('neogym_contact_form')):
-    echo do_shortcode('[neogym_contact_form]');
-endif;
-?>
+          <?php 
+          if(shortcode_exists('neogym_contact_form')):
+            echo do_shortcode('[neogym_contact_form]');
+          endif;
+          ?>
         </div>
       </div>
     </div>
