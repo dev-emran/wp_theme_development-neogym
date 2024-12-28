@@ -13,9 +13,7 @@
 
     if(!function_exists('neogym_the_content')){
         function neogym_the_content( $attr=[], $content=null, $tag=''){
-
-            // array_change_key_case((array) $attr, CASE_LOWER );
-
+            
             $default_attr = [
                 'class'     => 'default_class'
             ];
