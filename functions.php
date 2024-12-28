@@ -1,7 +1,7 @@
 <?php
 
-if (!function_exists('neogym_bootstrapping')) {
-    function neogym_bootstrapping()
+if (!function_exists('neogym_theme_suppots')) {
+    function neogym_theme_suppots()
     {
         load_theme_textdomain('neogym');
         add_theme_support('post-thumbnails', ['post', 'trainers', 'why_us', 'students']);
@@ -12,19 +12,29 @@ if (!function_exists('neogym_bootstrapping')) {
             ]
         );
     }
+
+    add_action('after_setup_theme', 'neogym_theme_suppots');
+
 }
+if(!function_exists('neogym_enqueue_styles')){
+    function neogym_enqueue_styles()
+    {
+        //enqueue styles
+        $version = wp_get_theme()->get('Version');
+        wp_enqueue_style('bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', [], $version, 'all');
+        wp_enqueue_style('neogym-carousel', '//cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css', [], $version, 'all');
+        wp_enqueue_style('neogym-responsive', get_template_directory_uri() . '/assets/css/responsive.css', ['bootstrap'], $version, 'all');
+        wp_enqueue_style('neogym-style', get_stylesheet_uri(), [], $version, 'all');
 
-add_action('after_setup_theme', 'neogym_bootstrapping');
 
-//excerpt custom length
-// if(!function_exists('neogym_custom_excerpt_length')){
-//     function neogym_custom_excerpt_length($length)
-//     {
-//         return 5;
-//     }
-// }
+        //enqueue javascripts
+        wp_enqueue_script('jquery-js', get_template_directory_uri() . '/assets/js/jquery-3.4.1.min.js', [], $version, true);
+        wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.js', [], $version, true);
+        
 
-// add_filter('excerpt_length', 'neogym_custom_excerpt_length');
+    }
+}
+add_action('wp_enqueue_scripts', 'neogym_enqueue_styles');
 function get_custom_excerpt($limit)
 {
     $excerpt = wp_trim_words(get_the_excerpt(), $limit);
@@ -368,7 +378,9 @@ add_action('init', 'neogym_custom_all_shortcodes');
 
 
 
-/**
- * Hadi vai youtube video practice on shortcode
- */
-require_once get_template_directory() . '/inc/shortcode.php';
+//shortcode
+require_once get_template_directory() . '/inc/shortcodes/shortcode.php';
+
+//codestar framework
+require_once get_theme_file_path('/inc/codestar-framework/codestar-framework.php');
+require_once get_theme_file_path('/inc/codestar-framework/samples/admin-options.php');
