@@ -1,7 +1,31 @@
 <?php
+if (!defined('ABSPATH')) {
+    die;
+}
+
+//shortcode
+require_once get_template_directory() . '/inc/shortcodes/shortcode.php';
+
+//custom function
+require_once get_theme_file_path('inc/custom-functions.php');
+
+//TGM
+require_once get_theme_file_path('inc/TGM.php');
+
+//codestar framework
+require_once get_theme_file_path('/lib/codestar-framework/codestar-framework.php');
+require_once get_theme_file_path('/inc/codestar/theme-options.php');
+require_once get_theme_file_path('/inc/codestar/metabox.php');
+
+//cmb2
+require_once get_theme_file_path('lib/cmb2/init.php');
+require_once get_theme_file_path('inc/cmb2-conditionals/cmb2-conditionals.php');
+require_once get_theme_file_path('inc/cmb2/studens-cpt.php');
+require_once get_theme_file_path('inc/cmb2-conditionals/cmb2-conditionals.php');
+require_once get_theme_file_path('inc//Student-CPT/student-cpt-func.php');
 
 if (!function_exists('neogym_theme_suppots')) {
-    function neogym_theme_suppots()
+    function neogym_theme_suppots() 
     {
         load_theme_textdomain('neogym');
         add_theme_support('post-thumbnails', ['post', 'trainers', 'why_us', 'students']);
@@ -16,7 +40,7 @@ if (!function_exists('neogym_theme_suppots')) {
     add_action('after_setup_theme', 'neogym_theme_suppots');
 
 }
-if(!function_exists('neogym_enqueue_styles')){
+if (!function_exists('neogym_enqueue_styles')) {
     function neogym_enqueue_styles()
     {
         //enqueue styles
@@ -26,15 +50,26 @@ if(!function_exists('neogym_enqueue_styles')){
         wp_enqueue_style('neogym-responsive', get_template_directory_uri() . '/assets/css/responsive.css', ['bootstrap'], $version, 'all');
         wp_enqueue_style('neogym-style', get_stylesheet_uri(), [], $version, 'all');
 
-
         //enqueue javascripts
         wp_enqueue_script('jquery-js', get_template_directory_uri() . '/assets/js/jquery-3.4.1.min.js', [], $version, true);
         wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/assets/js/bootstrap.js', [], $version, true);
+        // wp_enqueue_script('cmb2-conditional', get_template_directory_uri() . '/inc/cmb2-conditionals/cmb2-conditionals.js', [], $version, true);
         
 
     }
 }
 add_action('wp_enqueue_scripts', 'neogym_enqueue_styles');
+
+
+if(!function_exists('neogym_admin_scripts')){
+    function neogym_admin_scripts()
+    {
+        wp_enqueue_script('cmb2-conditional-admin', get_template_directory_uri() . '/inc/cmb2-conditionals/cmb2-conditionals.js');
+    }
+
+
+}
+add_action('admin_enqueue_scripts', 'neogym_admin_scripts');
 function get_custom_excerpt($limit)
 {
     $excerpt = wp_trim_words(get_the_excerpt(), $limit);
@@ -375,12 +410,3 @@ return ob_get_clean();
     }
 }
 add_action('init', 'neogym_custom_all_shortcodes');
-
-
-
-//shortcode
-require_once get_template_directory() . '/inc/shortcodes/shortcode.php';
-
-//codestar framework
-require_once get_theme_file_path('/inc/codestar-framework/codestar-framework.php');
-require_once get_theme_file_path('/inc/codestar-framework/samples/admin-options.php');

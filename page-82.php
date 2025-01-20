@@ -3,7 +3,8 @@ get_header();
 ?>
 
 <!--Blog section Start -->
-<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);" class="blog_section layout_padding">
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);"
+    class="blog_section layout_padding">
     <div class="container">
         <div class="heading_container mb-5">
             <h2 class="text-white">Loop and WP_Query Practice</h2>
@@ -17,8 +18,9 @@ get_header();
             ];
             $query = new WP_Query($args);
             if ($query->have_posts()):
-                while ($query->have_posts()): $query->the_post();
-            ?>
+                while ($query->have_posts()):
+                    $query->the_post();
+                    ?>
                     <!-- Card <?php echo $index ?> -->
                     <div class="col-md-3">
                         <div class="card post-card">
@@ -40,7 +42,9 @@ get_header();
                             </div>
 
                             <div class="card-body">
-                                <a href="<?php the_permalink(); ?>"><h2 class="card-title h5"><?php the_title(); ?></h2></a>
+                                <a href="<?php the_permalink(); ?>">
+                                    <h2 class="card-title h5"><?php the_title(); ?></h2>
+                                </a>
 
                                 <p class="card-text text-muted small">
                                     <?php echo get_custom_excerpt(10); ?>
@@ -69,7 +73,7 @@ get_header();
                             </div>
                         </div>
                     </div>
-            <?php
+                    <?php
                     $index++;
                 endwhile;
             endif;
@@ -80,7 +84,8 @@ get_header();
 </section>
 <!--Blog section End -->
 
-<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);" class="blog_section layout_padding">
+<section style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/healthy-bg.jpg);"
+    class="blog_section layout_padding">
     <div class="container">
         <div class="heading_container mb-5">
             <h2 class="text-white">Page Type</h2>
@@ -93,10 +98,11 @@ get_header();
 
             $pageTypeQuery = new WP_Query($args2);
             if ($pageTypeQuery->have_posts()):
-                while ($pageTypeQuery->have_posts()): $pageTypeQuery->the_post();
-            ?>
+                while ($pageTypeQuery->have_posts()):
+                    $pageTypeQuery->the_post();
+                    ?>
                     <li class="list-group-item"><?php the_title(); ?></li>
-            <?php
+                    <?php
                 endwhile;
             endif;
             wp_reset_postdata();

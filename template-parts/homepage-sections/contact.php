@@ -13,7 +13,27 @@
               Contact Us
             </h2>
           </div>
-          <?php echo do_shortcode('[neogym_contact_form]'); ?>
+          <?php //echo do_shortcode('[neogym_contact_form]'); ?>
+          <form method="post" id="contact-form">
+            <?php wp_nonce_field('contact_form_nonce', 'contact_form_nonce_field') ?>
+            <div>
+              <input type="text" name="name" id="name" placeholder="Name" />
+            </div>
+            <div>
+              <input type="email" name="email" id="email" placeholder="Email" />
+            </div>
+            <div>
+              <input type="text" name="phone_no" id="phone_name" placeholder="Phone Number" />
+            </div>
+            <div>
+              <input type="text" name="message" id="message" class="message-box" placeholder="Message" />
+            </div>
+            <div class="d-flex ">
+              <button type="submit">
+                Send Message
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

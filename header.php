@@ -18,9 +18,10 @@
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <?php wp_head();?>
 </head>
 
-<body>
+<body <?php body_class();?>>
   <div class="hero_area" style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/hero-bg.jpg')">
     <!-- header section strats -->
     <header class="header_section">
@@ -37,13 +38,13 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
-              <?php 
-                $args = [
-                  'theme_location'  => 'main_menu',
-                  'menu_class'        => 'navbar-nav',
-                ];
-                wp_nav_menu($args);
-              ?>
+              <?php
+$args = [
+    'theme_location' => 'main_menu',
+    'menu_class' => 'navbar-nav',
+];
+wp_nav_menu($args);
+?>
               <div class="user_option">
                 <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                   <button style="background-image: url('<?php echo get_template_directory_uri() . '/assets/' ?>images/search-icon.png);" class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>

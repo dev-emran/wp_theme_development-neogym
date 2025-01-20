@@ -40,14 +40,43 @@
                                     ?>
                                 </p>
                                 <div class="mb-3">
-                                    <span class="badge bg-primary">Year 3</span>
-                                    <span class="badge bg-success">GPA: 3.8</span>
+                                    <?php 
+                                        $duration = get_post_meta(get_the_ID(), 'duration', true);
+                                        $gpa = get_post_meta(get_the_ID(), 'student_gpa', true);
+                                        if($duration):
+                                    ?>
+                                    <span class="badge bg-primary">
+                                        <?php printf("Duration: %s year", $duration);?>
+                                    </span>
+                                <?php endif; 
+                                    if($gpa):
+                                ?>
+                                    <span class="badge bg-success">GPA: <?php echo $gpa ?></span>
+                                    <?php
+                                        endif;
+                                        $gender = get_post_meta(get_the_ID(), 'neogym_gender', true);
+                                        $class = get_post_meta(get_the_ID(), 'neogym_std_class', true);
+                                        $subjects = get_post_meta(get_the_ID(), 'neogym_std_subjects', true);
+
+                                    ?>
+                                    <span class="badge bg-warning">Gender: <?php echo esc_html(ucwords($gender)); ?></span>
+                                    <span class="badge bg-info">Class: <?php echo esc_html($class); ?></span>
+                                    <span class="badge bg-info">Subjects: 
+                                    <?php
+                                        if($subjects):
+                                            echo implode(', ', array_column($subjects, 'neogym_std_subject'));
+                                    endif;
+                                    ?>
+                                    </span>
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <a href="<?php the_permalink(); ?>" class="btn btn-info btn-sm mx-1"><i
                                             class="fas fa-eye"></i> View</a>
                                 </div>
                             </div>
+                            <?php
+                                // print_r($subjects);
+                            ?>
                         </div>
                     </div>
                     <?php
